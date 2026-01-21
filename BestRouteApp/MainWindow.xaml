@@ -1,0 +1,84 @@
+<Window x:Class="BestRouteApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BestRouteApp"
+        mc:Ignorable="d"
+        Title="BestRoute" Height="720" Width="960">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Google Maps API Key" FontWeight="SemiBold" />
+            <TextBox Grid.Row="1" Text="{Binding ApiKey, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,0,12" />
+
+            <TextBlock Grid.Row="2" Text="City (optional, used to normalize new addresses)" FontWeight="SemiBold" />
+            <TextBox Grid.Row="3" Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,0,12" />
+
+            <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,0,0,12">
+                <StackPanel Width="420">
+                    <TextBlock Text="Base starting point" FontWeight="SemiBold" />
+                    <TextBox Text="{Binding BaseStartingAddress, UpdateSourceTrigger=PropertyChanged}" Margin="0,4,0,0" />
+                </StackPanel>
+                <StackPanel Margin="24,0,0,0">
+                    <TextBlock Text="Current starting point" FontWeight="SemiBold" />
+                    <TextBlock Text="{Binding CurrentStartingAddress}" Margin="0,6,0,0" />
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0,0,0,12">
+                <TextBox Width="480" Text="{Binding NewAddress, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,8,0" />
+                <Button Content="Add Address" Width="140" Click="OnAddAddress" />
+            </StackPanel>
+
+            <GroupBox Grid.Row="6" Header="Stops">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Height="260">
+                    <ItemsControl ItemsSource="{Binding Addresses}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="0,4,0,4">
+                                    <CheckBox IsChecked="{Binding IsCompleted, Mode=TwoWay}" Checked="OnAddressChecked" Unchecked="OnAddressChecked" />
+                                    <TextBlock Text="{Binding Address}" Margin="8,0,0,0">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsCompleted}" Value="True">
+                                                        <Setter Property="TextDecorations" Value="Strikethrough" />
+                                                        <Setter Property="Foreground" Value="Gray" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </GroupBox>
+
+            <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="0,12,0,12">
+                <Button Content="Recalculate" Width="160" Click="OnRecalculate" />
+                <TextBlock Text="{Binding StatusMessage}" Margin="12,6,0,0" Foreground="DimGray" />
+            </StackPanel>
+
+            <TextBlock Grid.Row="8" Text="Route link" FontWeight="SemiBold" />
+            <StackPanel Grid.Row="9" Orientation="Horizontal" Margin="0,4,0,0">
+                <TextBox Text="{Binding RouteLink}" Width="720" IsReadOnly="True" TextWrapping="Wrap" />
+                <Button Content="Copy" Width="100" Margin="8,0,0,0" Click="OnCopyLink" />
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Window>
