@@ -1,4 +1,4 @@
-# BestRoute
+﻿# BestRoute
 
 BestRoute is a Windows (WPF) app that generates an optimized Google Maps route link for a set of in-city stops. It uses the Google Maps Directions API to reorder pending stops and produces a shareable Google Maps directions link.
 
@@ -20,3 +20,11 @@ BestRoute is a Windows (WPF) app that generates an optimized Google Maps route l
 5. Add more stops and click **Recalculate** to re-optimize.
 
 > If no API key is provided, the app will still generate a route link but will not optimize the order.
+## Support This Work
+
+If this project is useful to you, consider supporting ongoing independent development.
+
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20this%20work-ff5e5b?logo=ko-fi&logoColor=white)](https://ko-fi.com/earthcraft)
+
+Direct link: https://ko-fi.com/earthcraft
+
